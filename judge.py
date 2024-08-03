@@ -14,6 +14,8 @@ def judge(card_last, card_first):
         return True
     elif card_last[0]=='+2' and card_first[0]=="+4":
         return True
+    elif card_last[1]=="all":
+        return True
     else:
         return False
 

@@ -1,7 +1,7 @@
 def check_uno(n, player):
     '''检查当前玩家是否达到了UNO状态（即只剩一张牌）'''
     # 假设player是一个列表的列表，其中player[n]是当前玩家的手牌
-    if len(player[n]) == 1:
+    if len(player[n].card) == 1:
         print("uno")
     else:
         pass  # 如果不需要特别处理非UNO情况，可以简单地使用pass
@@ -23,7 +23,6 @@ def win(n,player):
     
     """
     '''判定胜利'''
-    global t
     a=n%4
     if len(player[a].card)==0:
         print(f"玩家{player[a].name}赢了")

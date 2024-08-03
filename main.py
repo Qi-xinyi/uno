@@ -1,4 +1,5 @@
 import os
+import all_card
 
 def clc():
     '''clear console'''
@@ -7,16 +8,12 @@ def clc():
     else:  # 假设不是Windows，则使用Unix/Linux命令
         os.system('clear')
 
-# import card as c
-import random
-import all_card
 from player import Player
 from card import Card
 import judge
 import judge_win as jw
 
 t=True  #判断是否正常结束
-
 
 def add_one(player):
     """
@@ -34,16 +31,19 @@ def add_one(player):
         player.add_cards(1) #加一张牌
         for i in range(0,len(player.card)): 
             print(f"{i+1}:{player.card[i]}",end=',')    #重新打印玩家手牌
+        t=3
+    else:
+        t=2
+    return t
 
-all_card=all_card.all_card
-random.shuffle(all_card)    #洗牌
+
 clc()
 player=[0,0,0,0]
 for i in range(4):
     a_player=input("Player name: ")
     seat=int(input("Player seat: (<4)"))
-    player1=Player(a_player,all_card[:8],seat)
-    all_card=all_card[8:]
+    player1=Player(a_player,all_card.all_card[:8],seat)
+    all_card.all_card=all_card.all_card[8:]
     player[player1.seat-1]=player1
     a=input();clc() #等待后清空界面
 
@@ -51,9 +51,9 @@ for i in range(4):
     print(f"{player[i].name},你的座位号是{player[i].seat}你的初始牌是{player[i].card}")
     a=input();clc();a=input()
 
-card_last=Card(all_card[0])
-card_last.name=all_card[0]
-all_card=all_card[1:]
+card_last=Card(all_card.all_card[0])
+card_last.name=all_card.all_card[0]
+all_card.all_card=all_card.all_card[1:]
 
 colour='0'
 n=0 #n%4为当前玩家编号
@@ -61,7 +61,7 @@ add=0   #累计加数
 bool_=True  #判断是否是倒序
 
 while True:
-    if len(all_card)==0:
+    if len(all_card.all_card)==0:
         print("游戏结束")
         t=False #非正常结束
         break
@@ -99,7 +99,12 @@ while True:
         card_last=card_out  #使用完毕的牌更新为上一张牌
         
         jw.check_uno(a,player)   #判断是否是Uno
-        eval(jw.win(a,player))#判断是否胜利
+        turn=jw.win(a,player)#判断是否胜利
+        if turn=='continue':
+            continue
+        else:
+            break
+        clc()
         
 if t==False:   #如果非正常结束，则跳出循环
     score=[0,0,0,0] #记录个人得分

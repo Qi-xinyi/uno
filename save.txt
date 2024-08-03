@@ -1,0 +1,7 @@
+for i in range(4):
+    a_player=str(i)
+    seat=i
+    player1=Player(a_player,all_card[:8],seat)
+    all_card=all_card[8:]
+    player[player1.seat-1]=player1
+    a=input();clc() #等待后清空界面
