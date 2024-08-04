@@ -15,6 +15,20 @@ import judge_win as jw
 
 t=True  #判断是否正常结束
 
+def count_card(player):
+    """
+    统计玩家手牌数量。
+    
+    Args:
+        player (list): 玩家列表，需要包含name和card属性。
+    
+    Returns:
+        None
+    
+    """
+    for i in range(4):
+        print(f'{player[i].name}有{len(player[i].card)}张牌')
+
 
 def add_one(player):
     """
@@ -67,6 +81,7 @@ while True:
         break
     a=n%4   #当前玩家编号
     print(f"{player[a].name}出牌，上一张牌是{card_last.name}\n你所持有的牌是:",end='\n')
+    count_card(player)  #统计玩家手牌数量
     
     if card_last.name[0]=='+4':   #判断是否可以质疑
         add=judge.query(player,n,colour,add,bool_)  #质疑玩家手牌
