@@ -40,8 +40,8 @@ def add_one(player):
 clc()
 player=[0,0,0,0]
 for i in range(4):
-    a_player=str(i)
-    seat=i
+    a_player=input("Player name: ")
+    seat=int(input("Player seat: (<4)"))
     player1=Player(a_player,all_card.all_card[:8],seat)
     all_card.all_card=all_card.all_card[8:]
     player[player1.seat-1]=player1
@@ -60,9 +60,6 @@ n=0 #n%4为当前玩家编号
 add=0   #累计加数
 bool_=True  #判断是否是倒序
 
-    
-player[1].card=[['+2','g'],['+4','all']]
-
 while True:
     if len(all_card.all_card)==0:
         print("游戏结束")
@@ -71,12 +68,11 @@ while True:
     a=n%4   #当前玩家编号
     print(f"{player[a].name}出牌，上一张牌是{card_last.name}\n你所持有的牌是:",end='\n')
     
-    if card_last.name[1]=='+4':   #判断是否可以质疑
+    if card_last.name[0]=='+4':   #判断是否可以质疑
         add=judge.query(player,n,colour,add,bool_)  #质疑玩家手牌
         
     for i in range(0,len(player[a].card)):
         print(f"{i+1}:{player[a].card[i]}",end=',') #打印玩家手牌
-
         
     t=add_one(player[a])  #询问是否要加一张牌
     if t==3:
@@ -116,7 +112,8 @@ while True:
         jw.check_uno(a,player)   #判断是否是Uno
         turn=jw.win(a,player)#判断是否胜利
         if turn=='continue':
-            continue;input();clc()
+            input();clc();continue
+            # continue
         else:
             break
         

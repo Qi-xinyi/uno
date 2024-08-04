@@ -3,19 +3,19 @@ class Card:
         self.name = name# 将传入的name赋值给实例变量self.name
     
     def judge_name(self):
-        if self.name[1]=='T':
+        if self.name[0]=='T':
             # 返回False，0，表示不是正序，不是加牌，不跳过
             return False,0,0
         # 如果上一张牌是+2牌
-        elif self.name[1]=='+2':
+        elif self.name[0]=='+2':
             # 返回True，2，1，表示是正序，+2牌，需要跳过
-            return True,2,1
+            return True,2,0
         # 如果上一张牌是+4牌
-        elif self.name[1]=='+4':
+        elif self.name[0]=='+4':
             # 返回True，4，1，表示是正序，+4牌，需要跳过
-            return True,4,1
+            return True,4,0
         # 如果上一张牌是停止牌
-        elif self.name[1]=='S':
+        elif self.name[0]=='S':
             # 返回True，0，1，表示是正序，不是加牌，需要跳过
             return True,0,1
         else:

@@ -39,8 +39,11 @@ def add(add, card_first,player):
         1. 如果需要添加的牌数add为0，则不执行添加操作，直接返回0。
         2. 如果玩家手中第一张牌的花色是'+2'或'+4'，则不执行添加操作，直接返回0。
     """
-    if add!=0 and (card_first[1]!='+2' or card_first[1]!='+4'):
+    if add!=0 and (card_first.name[1]!='+2' or card_first.name[1]!='+4'):
         player.add_cards(add)
+        return 0
+    else:
+        return add
 
 def query(player,n,colour,add,bool_):
     '''
@@ -60,7 +63,7 @@ def query(player,n,colour,add,bool_):
                 break
         if d:
             print('质疑成功')
-            player[b].add_cards(6)
+            player[b].add_cards(4)
         else:
             print('质疑失败')
             if add+6>8:
