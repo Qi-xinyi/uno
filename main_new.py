@@ -100,7 +100,12 @@ while True:
                 n=n-1
             continue
     
-    number=int(input("\n请输入出牌号: "))-1
+    try:
+        number=int(input("\n请输入出牌号: "))-1
+        player[a].card[number]   #判断输入的牌是否在玩家手中
+    except:
+        print("输入错误")   #如果输入错误，则跳出循环
+        continue
     if judge.judge(player[a].card[number],card_last.name):
         print("出牌正确")   #判断牌是否可以出
         card_out=Card(player[a].card[number])   #将牌放入card_out
@@ -120,14 +125,20 @@ while True:
         
         player[a].play_a_card(card_out.name)     #将牌从玩家手中移除
         if card_out.name[1]=='all':
-            card_out.name[1]=input("请输入颜色(g,b,y,r)：")
+            while True:
+                a=input("请输入颜色(g,b,y,r)：")
+                if a in ['g','b','y','r']:
+                    card_out.name[1]=a
+                    break
+                else:
+                    print("输入错误")
         colour_last=card_last.name[1]  #更新上一张牌
         card_last=card_out  #使用完毕的牌更新为上一张牌
         
         jw.check_uno(a,player)   #判断是否是Uno
         turn=jw.win(a,player)#判断是否胜利
         if turn=='continue':
-            input();clc();continue
+            input();clc();input();continue
             # continue
         else:
             break
